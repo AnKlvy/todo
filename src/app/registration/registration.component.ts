@@ -17,7 +17,7 @@ export class RegistrationComponent {
     });
   }
 
-  @Output() userRegistered = new EventEmitter<any>();
+  // @Output() userRegistered = new EventEmitter<any>();
 
 
   onSubmit() {

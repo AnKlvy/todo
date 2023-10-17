@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/registration', pathMatch: 'full' }, // Перенаправление на маршрут "registration" при загрузке приложения
   { path: 'registration', component: RegistrationComponent },
   { path: 'userlist', component: UserlistComponent },
-  { path: 'userprofile', component: UserprofileComponent },
+  { path: 'userprofile/:userEmail', component: UserprofileComponent },
 ];
 
 @NgModule({
