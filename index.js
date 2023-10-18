@@ -25,6 +25,8 @@ app.listen(5039, () => {
   connectToMongoDB();
 });
 
+
+// Read collection
 app.get("/api/university/getStudents", async (request, response) => {
   try {
     const result = await students.find({}).toArray();
@@ -35,6 +37,14 @@ app.get("/api/university/getStudents", async (request, response) => {
   }
 });
 
+// Add a new document to the collection
+app.post("/api/university/addStudent", async (req, res) => {
+    let collection = await db.collection("posts");
+    let newDocument = req.body;
+    newDocument.date = new Date();
+    let result = await collection.insertOne(newDocument);
+    res.send(result).status(204);
+  });
 
 // var Express = require("express");
 // var Mongoclient = require("mongodb").MongoClient;
