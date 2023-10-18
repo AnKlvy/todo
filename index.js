@@ -1,24 +1,40 @@
 const { MongoClient } = require("mongodb");
+const Express = require("express");
+const cors = require("cors");
 
-// Replace the uri string with your connection string.
+const app = Express();
+app.use(cors());
+
 const uri = "mongodb://127.0.0.1:27017/";
-
 const client = new MongoClient(uri);
+let students; // Создаем переменную для коллекции студентов
 
-async function run() {
+async function connectToMongoDB() {
   try {
-    const database = client.db('university');
-    const students = database.collection('students');
-
-    const getStudents = await students.find();
-
-    console.log(getStudents);
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
+    await client.connect();
+    const database = client.db("university");
+    students = database.collection("students");
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("MongoDB connection failed:", error);
   }
 }
-run().catch(console.dir);
+
+app.listen(5039, () => {
+  console.log("Server is running on port 5039");
+  connectToMongoDB();
+});
+
+app.get("/api/university/getStudents", async (request, response) => {
+  try {
+    const result = await students.find({}).toArray();
+    response.send(result);
+  } catch (error) {
+    console.error("Error fetching students:", error);
+    response.status(500).send("Internal Server Error");
+  }
+});
+
 
 // var Express = require("express");
 // var Mongoclient = require("mongodb").MongoClient;
