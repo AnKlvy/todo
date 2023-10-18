@@ -8,6 +8,9 @@ import { UserlistComponent } from './userlist/userlist.component';
 import { FormsModule } from '@angular/forms'; // Импорт модуля FormsModule
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import { HttpClientModule } from '@angular/common/http'; // Импортируйте HttpClientModule
+import { ApiService } from './service/api.service';
+
 
 
 @NgModule({
@@ -22,9 +25,10 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule // Добавление FormsModule в раздел imports
+    ReactiveFormsModule, // Добавление FormsModule в раздел imports
+    HttpClientModule, // Добавьте HttpClientModule в список импортируемых модулей
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

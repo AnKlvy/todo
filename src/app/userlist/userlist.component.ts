@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from '../service/api.service';
 
 @Component({
   selector: 'app-userlist',
@@ -6,15 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./userlist.component.css']
 })
 export class UserlistComponent {
-  registeredUsers: any[] = [];
+  students: any[] = [];
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    const storedUsers = localStorage.getItem('users');
-    if (storedUsers) {
-      this.registeredUsers = JSON.parse(storedUsers);
-    }
-  }  
+    this.apiService.getStudents().subscribe((data: any) => {
+      this.students = data;
+    });
 
   
   }
-  
+}

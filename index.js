@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const app = Express();
 app.use(cors());
+app.use(Express.json()); // Добавьте эту строку для разбора JSON-тела запросов
 
 const uri = "mongodb://127.0.0.1:27017/";
 const client = new MongoClient(uri);
@@ -20,10 +21,14 @@ async function connectToMongoDB() {
   }
 }
 
-app.listen(5039, () => {
-  console.log("Server is running on port 5039");
+app.listen(8080, () => {
+//   console.log("Server is running on port 5039");
   connectToMongoDB();
 });
+
+app.get("/", (req, res) => {
+    res.send("Hello, World!");
+  });
 
 
 // Read collection
@@ -39,12 +44,17 @@ app.get("/api/university/getStudents", async (request, response) => {
 
 // Add a new document to the collection
 app.post("/api/university/addStudent", async (req, res) => {
-    let collection = await db.collection("posts");
-    let newDocument = req.body;
-    newDocument.date = new Date();
-    let result = await collection.insertOne(newDocument);
-    res.send(result).status(204);
-  });
+    // try{
+    // let newDocument = req.body;
+    // console.log(newDocument)
+    const result = await students.insertOne(req.body);
+    res.send(result);
+    // }
+    // catch(error){
+    //     console.error("Error fetching students:", error);
+    // }
+});
+
 
 // var Express = require("express");
 // var Mongoclient = require("mongodb").MongoClient;

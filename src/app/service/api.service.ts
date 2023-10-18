@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:5039/api/university'; // Замените на URL вашего Express API
+  private apiUrl = 'http://localhost:8080/api/university'; // Замените на URL вашего Express API
 
   constructor(private http: HttpClient) { }
 
