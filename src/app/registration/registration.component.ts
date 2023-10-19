@@ -8,10 +8,10 @@ import { ApiService } from '../service/api.service'; // Импортируйте
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  registrationForm: FormGroup;
+  updateForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
-    this.registrationForm = this.formBuilder.group({
+    this.updateForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -19,8 +19,8 @@ export class RegistrationComponent {
   }
 
   onSubmit() {
-    if (this.registrationForm.valid) {
-      const userData = this.registrationForm.value;
+    if (this.updateForm.valid) {
+      const userData = this.updateForm.value;
       
       // Пример отправки данных с использованием HttpClient
 this.apiService.addStudent(userData).subscribe(

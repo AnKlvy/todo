@@ -37,14 +37,17 @@ export class UserprofileComponent {
   }
 
   onUpdate(): void {
-    this.apiService.updateStudent(this.getId, this.updateForm.value).subscribe(
-      () => {
-        console.log('Data updated successfully!');
-        this.ngZone.run(() => this.router.navigateByUrl('/'));
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+   
+      this.apiService.updateStudent(this.getId, this.updateForm.value)
+      .subscribe(() => {
+          console.log('Data updated successfully!');
+          this.ngZone.run(() => {
+            this.router.navigateByUrl('/'); // Перенаправление после успешного обновления
+          });
+      }, (err) => {
+          console.log(err);
+      });
+    
+    
   }
 }
