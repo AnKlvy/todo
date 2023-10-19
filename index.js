@@ -69,7 +69,14 @@ app.get("/api/university/getStudent/:_id", async (req, res) => {
   }
 });
 
-
+app.put("/api/university/updateStudent/:_id", async (req, res) => {
+  const query = { _id: new ObjectId(req.params._id) };
+  const updates = {
+    $set: { students: req.body }
+  };
+    let result = await students.updateOne(query, updates);
+  res.send(result).status(200);
+});
 // var Express = require("express");
 // var Mongoclient = require("mongodb").MongoClient;
 // var cors = require("cors");
