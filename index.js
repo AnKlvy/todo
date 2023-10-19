@@ -1,6 +1,8 @@
 const { MongoClient } = require("mongodb");
 const Express = require("express");
 const cors = require("cors");
+const { ObjectId } = require("mongodb"); // Импортируйте ObjectId из mongodb
+
 
 const app = Express();
 app.use(cors());
@@ -55,6 +57,14 @@ app.post("/api/university/addStudent", async (req, res) => {
     // }
 });
 
+
+// Get a single post
+app.get("/api/university/getStudent/:_id", async (req, res) => {
+    let query = { _id: new ObjectId(req.params.id) };
+    let result = await students.findOne(query);
+    if (!result) res.send("Not found").status(404);
+    else res.send(result).status(200);
+  });
 
 // var Express = require("express");
 // var Mongoclient = require("mongodb").MongoClient;

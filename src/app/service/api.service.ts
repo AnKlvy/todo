@@ -16,4 +16,18 @@ export class ApiService {
   addStudent(studentData: any) {
     return this.http.post(`${this.apiUrl}/addStudent`, studentData);
   }
+
+  getStudent(studentId: string) {
+    return this.http.get(`${this.apiUrl}/getStudent/${studentId}`);
+  }
+
+  updateStudent(studentId: string, studentData: any) {
+    return this.http.put(`${this.apiUrl}/updateStudent/${studentId}`, studentData);
+  }
+  
+  deleteStudent(studentId: string) {
+    return this.http.delete(`${this.apiUrl}/deleteStudent/${studentId}`);
+  }
+  
+ 
 }

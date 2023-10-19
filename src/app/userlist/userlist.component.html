@@ -1,7 +1,7 @@
 <h2>Зарегистрированные пользователи:</h2>
 <ul>
   <li *ngFor="let user of students">
-    <a [routerLink]="['/userprofile', user.email]">{{ user.username }}</a>
+    <a [routerLink]="['/userprofile', user._id]">{{ user.username }}</a>
   </li>
 </ul>
 <a [routerLink]="'/registration'">Перейти к регистрации</a>
