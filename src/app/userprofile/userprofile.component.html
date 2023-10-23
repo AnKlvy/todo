@@ -34,6 +34,10 @@
     <button type="submit" [disabled]="updateForm.invalid">Обновить</button>
   </form>
 
+  <form [formGroup]="updateForm" (ngSubmit)="onDelete()">
+    <button type="submit" [disabled]="updateForm.invalid">Удалить</button>
+  </form>
+
   <!-- Отобразите данные пользователя -->
   <div *ngIf="userData">
     <h3>User Data:</h3>

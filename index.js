@@ -89,6 +89,23 @@ app.put("/api/university/updateStudent/:_id", async (req, res) => {
   }
 
 });
+
+// Удаление студента по идентификатору
+app.delete("/api/university/deleteStudent/:_id", async (req, res) => {
+  const query = { _id: new ObjectId(req.params._id) };
+  try {
+    let result = await students.deleteOne(query);
+    if (result.deletedCount > 0) {
+      res.status(200).send({});
+    } else {
+      res.status(404).send("Student not found");
+    }
+  } catch (error) {
+    console.error("Error deleting student:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 // var Express = require("express");
 // var Mongoclient = require("mongodb").MongoClient;
 // var cors = require("cors");

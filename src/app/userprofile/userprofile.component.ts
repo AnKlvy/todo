@@ -45,9 +45,23 @@ export class UserprofileComponent {
             this.router.navigateByUrl('/'); // Перенаправление после успешного обновления
           });
       }, (err) => {
-          console.log(err);
+          console.error(err);
       });
-    
-    
   }
+
+  onDelete(){
+    // Удаление студента
+this.apiService.deleteStudent(this.getId).subscribe(
+  () => {
+    console.log('Студент успешно удален.');
+    this.ngZone.run(() => {
+      this.router.navigateByUrl('/'); // Перенаправление после успешного обновления
+    });
+  },
+  (error) => {
+    console.error('Ошибка при удалении студента:', error);
+  }
+);
+  }
+
 }
