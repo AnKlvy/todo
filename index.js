@@ -71,11 +71,23 @@ app.get("/api/university/getStudent/:_id", async (req, res) => {
 
 app.put("/api/university/updateStudent/:_id", async (req, res) => {
   const query = { _id: new ObjectId(req.params._id) };
+  console.log(req.params._id)
   const updates = {
-    $set: { students: req.body }
+    $set: {
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password }
   };
+  console.log(req.body)
+  try{
     let result = await students.updateOne(query, updates);
-  res.send(result).status(200);
+    console.log(result)
+    res.send(result).status(200);
+  }
+  catch(e){
+    console.log(e)
+  }
+
 });
 // var Express = require("express");
 // var Mongoclient = require("mongodb").MongoClient;
